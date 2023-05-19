@@ -22,9 +22,9 @@ internal class Program
         }
         sr.Close();
 
-        Console.WriteLine($"3.feladat: {PilotaLista.Count()}");
-        Console.WriteLine($"4.feladat: {PilotaLista.Last().Nev}");
-        Console.WriteLine("5.feladat:");
+        Console.WriteLine($"3. feladat: {PilotaLista.Count()}");
+        Console.WriteLine($"4. feladat: {PilotaLista.Last().Nev}");
+        Console.WriteLine("5. feladat:");
         for (int pilotaindex = 0; pilotaindex < PilotaLista.Count(); pilotaindex++)
         {
             string[] ev_ho_nap = PilotaLista[pilotaindex].Szuletesidatum.Split(".");
@@ -34,9 +34,38 @@ internal class Program
                 Console.WriteLine($"\t{PilotaLista[pilotaindex].Nev} ({PilotaLista[pilotaindex].Szuletesidatum})");
             }
         }
-        while (true)
+        int legkisebb = PilotaLista[0].Rajtszam;
+        int legkisebbIndex = 0;
+        for (int pilotaindex = 0; pilotaindex < PilotaLista.Count(); pilotaindex++)
         {
-
+            int rajtszam = PilotaLista[pilotaindex].Rajtszam;
+            if (rajtszam < legkisebb && rajtszam != 0)
+            {
+                legkisebb = rajtszam;
+                legkisebbIndex = pilotaindex;
+            }
         }
+        Console.WriteLine($"6. feladat: {PilotaLista[legkisebbIndex].Nemzetiseg}");
+        List<int> votma = new List<int>();
+        List<int> votma2 = new List<int>();
+        for (int pilotaindex = 0; pilotaindex < PilotaLista.Count(); pilotaindex++)
+        {
+            int rajtszam = PilotaLista[pilotaindex].Rajtszam;
+            if (!votma.Contains(rajtszam))
+            {
+                votma.Add(rajtszam);
+            }
+            else
+            {
+                if (!votma2.Contains(rajtszam))
+                {
+                    votma2.Add(rajtszam);
+                }
+            }
+        }
+        votma2.Remove(0);
+        string output = "7. feladat: "+string.Join(", ", votma2);
+        Console.WriteLine(output);
+
     }
 }
